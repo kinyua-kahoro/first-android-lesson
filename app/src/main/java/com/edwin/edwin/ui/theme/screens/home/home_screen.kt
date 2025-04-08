@@ -1,6 +1,7 @@
 package com.edwin.edwin.ui.theme.screens.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,42 +20,54 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.edwin.edwin.R
+import com.edwin.edwin.navigation.ROUTE_DASHBOARD
+import com.edwin.edwin.navigation.ROUTE_LOGIN
+import com.edwin.edwin.navigation.ROUTE_REGISTER
 
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(navController: NavHostController) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color.Cyan),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "Welcome to Edwin's app.",
-            fontSize = 30.sp,
-            fontFamily = FontFamily.SansSerif,
-            color = Color.Gray,
-            fontStyle = FontStyle.Italic
-        )
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Image(painter = painterResource(id = R.drawable.altfeatures),
             contentDescription = "testimonial",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp))
-        Text(text = "Edwin is an upcoming app developer who is dedicated to creating aesthetic apps upon completion of his course.",
-            fontSize = 15.sp,
-            fontFamily = FontFamily.Serif,
+        Text(text = "Welcome to Edwin’s App! \uD83D\uDE80",
+            fontSize = 27.sp,
+            fontFamily = FontFamily.Default,
             color = Color.Black,
-            fontStyle = FontStyle.Italic
+            fontStyle = FontStyle.Normal
         )
-        Button(onClick = {}, modifier = Modifier.width(150.dp))
+        Text(text = "Discover a smarter way to develop mobile applications. Designed with simplicity and efficiency in mind, Edwin’s App helps you build apps skillfully.\n" +
+                "\uD83D\uDD39 User-Friendly & Intuitive – Navigate effortlessly with a sleek and modern interface.\n" +
+                "\uD83D\uDD39 Powerful Features – AI-powered insights, seamless integration.\n" +
+                "\uD83D\uDD39 Available Anywhere – Use it on web and mobile for a seamless experience.\n"+
+                "Get started now and make your life easier with Edwin’s App!",
+            fontSize = 15.sp,
+            fontFamily = FontFamily.Default,
+            color = Color.Black,
+            fontStyle = FontStyle.Normal
+        )
+        Button(onClick = { navController.navigate(ROUTE_LOGIN) }, modifier = Modifier.width(150.dp))
             { Text(text = "Login", color = Color.White, fontSize = 20.sp, fontFamily = FontFamily.Cursive)}
         Spacer(modifier = Modifier.height(10.dp))
-        Button(onClick = {}, modifier = Modifier.width(150.dp))
+        Button(onClick = { navController.navigate(ROUTE_REGISTER) }, modifier = Modifier.width(150.dp))
             { Text(text = "Register", color = Color.White, fontSize = 20.sp, fontFamily = FontFamily.Cursive) }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(onClick = {navController.navigate(ROUTE_DASHBOARD)}, modifier = Modifier.width(150.dp))
+            { Text(text = "Dashboard", color = Color.White, fontSize = 20.sp, fontFamily = FontFamily.Cursive)}
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun HomePrev() {
-    HomeScreen()
+    HomeScreen(rememberNavController())
 }
